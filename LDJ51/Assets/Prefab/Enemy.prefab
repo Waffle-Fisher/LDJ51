@@ -45,7 +45,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.3584906, g: 0.10005045, b: 0.038892854, a: 1}
-  m_Intensity: 2
+  m_Intensity: 3
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 8944816648101907223}
   - component: {fileID: 8944816648101907222}
   - component: {fileID: 8944816648101907226}
+  - component: {fileID: 1607707819}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -228,3 +229,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stats: {fileID: 11400000, guid: 2a42c00de5d30de4fb45af1c19d61a45, type: 2}
+--- !u!54 &1607707819
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944816648101907220}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0

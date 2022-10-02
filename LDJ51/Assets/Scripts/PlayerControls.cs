@@ -34,15 +34,6 @@ public class PlayerControls : MonoBehaviour
         ProcessShooting();
     }
 
-    private void ProcessShooting()
-    {
-        if(Shoot.IsInProgress())
-        {
-            Debug.Log("I'm firing!");
-            _weapon.Shoot();
-        }
-    }
-
     private void ProcessWeaponRotation()
     {
         if (Rotate.IsInProgress())
@@ -51,5 +42,23 @@ public class PlayerControls : MonoBehaviour
             _weapon.RotateWeapon(r);
         }
     }
+
+    // 2 Ways to shoot
+    // Way 1: Press space to enable shooting, press again to disable
+    //private void ProcessShooting()
+    //{
+    //    if(Shoot.triggered)
+    //    {
+    //        _weapon.ToggleShooting();
+    //    }
+    //}
+
+    // Way 2: Hold down space to shoot
+    private void ProcessShooting()
+    {
+        _weapon.Fire(Shoot.IsInProgress());
+    }
+
+    
 }
 

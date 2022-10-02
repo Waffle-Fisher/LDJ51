@@ -12,17 +12,26 @@ public class EnemyBehavior : MonoBehaviour
     private bool _hasBeenHit = false;
     private Vector3 _targetPos;
 
-    private void Start()
+    private void Awake()
     {
+        InitializeLight();
+        InitializeColor();
         _targetPos = new Vector3(0, transform.position.y, 0);
+        transform.localScale = _stats.Scale;
+        transform.LookAt(_targetPos);
+    }
+    private void InitializeLight()
+    {
         _pointLight = GetComponentInChildren<Light>().gameObject;
         _pointLight.SetActive(false);
+    }
+    private void InitializeColor()
+    {
         _renderer = GetComponent<Renderer>();
         c = _renderer.material.color;
         c.a = 1f;
         c.a = float.Epsilon;
         _renderer.material.color = c;
-        transform.LookAt(_targetPos);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -31,7 +40,6 @@ public class EnemyBehavior : MonoBehaviour
         c.a = 1f;
         _renderer.material.color = c;
         _hasBeenHit = true;
-
     }
 
     private void Update()
