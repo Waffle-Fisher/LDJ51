@@ -24,11 +24,6 @@ public class Sonar : MonoBehaviour
     {
         ProcessDetectorSizeChange();
         _timer += Time.deltaTime;
-        if (HasTenSecsPassed())
-        {
-            Debug.Log("Ten secs has passed");
-        }
-
         _detector.transform.RotateAround(transform.position, Vector3.up, _rotationPerSecond * Time.deltaTime);
     }
 

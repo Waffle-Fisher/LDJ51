@@ -8,11 +8,15 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private EnemySO Stats;
     public float MaxHealth { get; private set; }
     public float MoveSpeed { get; private set; }
-    public float VanishSpeed { get; private set; }
-    public float LightIntensity { get; private set; }
     public int Damage { get; private set; }
 
-    private void Start()
+    public float VanishSpeed { get; private set; }
+    public float LightIntensity { get; private set; }
+
+    public Color ModelColor { get; private set; }
+    public Color LightColor { get; private set; }
+
+    private void Awake()
     {
         InitializeEnemy();
     }
@@ -21,9 +25,12 @@ public class EnemyStats : MonoBehaviour
     {
         MaxHealth = Stats.MaxHealth;
         MoveSpeed = Stats.MoveSpeed;
-        transform.localScale = Stats.Scale;
-        LightIntensity = Stats.LightIntensity;
-        VanishSpeed = Stats.VanishSpeed;
         Damage = Stats.Damage;
+
+        transform.localScale = Stats.Scale;
+        VanishSpeed = Stats.VanishSpeed;
+        LightIntensity = Stats.LightIntensity;
+        ModelColor = Stats.ModelColor;
+        LightColor = Stats.LightColor;
     }
 }

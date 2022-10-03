@@ -39,16 +39,18 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(SummonEnemies());
+        if (_numEnemies > 0)
+        {
+            StartCoroutine(SummonEnemies());
+        }
     }
 
     private IEnumerator SummonEnemies()
     {
         while (true)
         {
-            int i = UnityEngine.Random.Range(1, 10);
+            int i = UnityEngine.Random.Range(3, 10);
             EnableObjectsInPool(i);
-            Debug.Log("Num enemies spawned: " + i);
             yield return new WaitForSeconds(_spawnTimer);
         }
     }
@@ -64,10 +66,6 @@ public class EnemySpawner : MonoBehaviour
                 amount--;
             }
             i++;
-        }
-        if (i >= Enemies.Count)
-        {
-            Debug.Log("Not Enough enemies available to spawn");
         }
     }
 

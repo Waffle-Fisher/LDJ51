@@ -9,6 +9,8 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] private InputAction Rotate;
     [SerializeField] private InputAction Shoot;
     [SerializeField] private float RotationSpeed = 5f;
+    [SerializeField][Range(0f,1f)] private float RecoilReduction = 0.5f;
+    private float _initialRotationSpeed = 0f;
     private PlayerWeapon _weapon;
 
     private void OnEnable()
@@ -26,6 +28,7 @@ public class PlayerControls : MonoBehaviour
     private void Start()
     {
         _weapon = GetComponentInChildren<PlayerWeapon>();
+        _initialRotationSpeed = RotationSpeed;
     }
 
     private void Update()
@@ -56,6 +59,7 @@ public class PlayerControls : MonoBehaviour
     // Way 2: Hold down space to shoot
     private void ProcessShooting()
     {
+        RotationSpeed = (Shoot.IsInProgress()) ? _initialRotationSpeed * RecoilReduction : _initialRotationSpeed;
         _weapon.Fire(Shoot.IsInProgress());
     }
 

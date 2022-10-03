@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Basic
   m_EditorClassIdentifier: 
   MaxHealth: 2
-  MoveSpeed: 3
-  LightIntensity: 5
+  MoveSpeed: 5
   Damage: 1
-  Scale: {x: 1, y: 1, z: 1}
-  VanishSpeed: 8
+  Scale: {x: 2, y: 1, z: 2}
+  VanishSpeed: 10
+  LightIntensity: 10
+  ModelColor: {r: 0.40787736, g: 0.015686277, b: 0.52156866, a: 1}
+  LightColor: {r: 0.40784314, g: 0.015686275, b: 0.52156866, a: 1}
