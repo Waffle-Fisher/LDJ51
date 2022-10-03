@@ -5,7 +5,7 @@ using UnityEngine;
 public class Sonar : MonoBehaviour
 {
     [SerializeField] private float _detectorLength = 10f;
-    private float _previousDLength;
+    private float _previousDLength = 10f;
     private float _timer = 0f;
     private GameObject _detector;
     private float _totalRotationTime = 10f;
@@ -16,7 +16,7 @@ public class Sonar : MonoBehaviour
     {
         _detector = GetComponentInChildren<BoxCollider>().gameObject;
         _rotationPerSecond = 360f / _totalRotationTime;
-        _previousDLength = _detectorLength;
+        ProcessDetectorSizeChange();
     }
 
     // Update is called once per frame
@@ -31,8 +31,6 @@ public class Sonar : MonoBehaviour
 
         _detector.transform.RotateAround(transform.position, Vector3.up, _rotationPerSecond * Time.deltaTime);
     }
-
-    
 
     private void OnTriggerEnter(Collider other)
     {

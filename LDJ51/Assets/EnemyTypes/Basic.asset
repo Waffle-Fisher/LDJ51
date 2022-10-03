@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c9167c98e086bd489cde9e8a4d24b37, type: 3}
   m_Name: Basic
   m_EditorClassIdentifier: 
-  MaxHealth: 1
+  MaxHealth: 2
   MoveSpeed: 3
-  AttackRange: 3
-  Scale: {x: 2, y: 1, z: 2}
+  AttackRange: 0.5
+  LightIntensity: 5
+  Scale: {x: 1, y: 1, z: 1}
   VanishSpeed: 8

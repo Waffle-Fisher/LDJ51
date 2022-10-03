@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemyBehavior : MonoBehaviour
 {
-    [SerializeField] private EnemySO _stats;
-    private GameObject _pointLight;
+    private EnemyStats Stats;
+    private Light _pointLight;
     private Renderer _renderer;
     private Color c;
     private bool _hasBeenHit = false;
@@ -14,31 +14,52 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Awake()
     {
+        Stats = GetComponent<EnemyStats>();
+    }
+
+    private void OnEnable()
+    {
+        Initialize();
+    }
+    private void Initialize()
+    {
         InitializeLight();
         InitializeColor();
+        SetSpawnPos();
         _targetPos = new Vector3(0, transform.position.y, 0);
-        transform.localScale = _stats.Scale;
         transform.LookAt(_targetPos);
     }
+
+    private void SetSpawnPos()
+    {
+        Vector2 rv = UnityEngine.Random.insideUnitCircle.normalized;
+        rv *= UnityEngine.Random.Range(EnemySpawner.Instance.MinSpawnDist, EnemySpawner.Instance.MaxSpawnDist);
+        transform.position = new(rv.x, transform.localScale.y / 2f, rv.y);
+    }
+
     private void InitializeLight()
     {
-        _pointLight = GetComponentInChildren<Light>().gameObject;
-        _pointLight.SetActive(false);
+        _pointLight = GetComponentInChildren<Light>();
+        _pointLight.intensity = 0f;
     }
     private void InitializeColor()
     {
         _renderer = GetComponent<Renderer>();
         c = _renderer.material.color;
-        c.a = 1f;
-        c.a = float.Epsilon;
+        c.a = 0f;
         _renderer.material.color = c;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name + " has hit me!");
+        RevealSelf();
+    }
+
+    public void RevealSelf()
+    {
         c.a = 1f;
         _renderer.material.color = c;
+        _pointLight.intensity = Stats.LightIntensity;
         _hasBeenHit = true;
     }
 
@@ -49,9 +70,10 @@ public class EnemyBehavior : MonoBehaviour
     }
     private void ProcessMove()
     {
-        if ( (transform.position - _targetPos).sqrMagnitude <= _stats.AttackRange * _stats.AttackRange)
+        if ( (transform.position - _targetPos).sqrMagnitude <= 0.5f)
         {
             Debug.Log("I have reached the target!");
+            gameObject.SetActive(false);
         }
         else
         {
@@ -61,24 +83,29 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Move()
     {
-       transform.Translate(_stats.MoveSpeed * Time.deltaTime * transform.forward,Space.World);
+       transform.Translate(Stats.MoveSpeed * Time.deltaTime * transform.forward,Space.World);
     }
 
     private void ProcessFade()
     {
-        if (c.a <= 0f)
-        {
-            _hasBeenHit = false;
-        }
         if (_hasBeenHit)
         {
-            Fade();
+            _hasBeenHit = false;
+            StartCoroutine(Fade());
         }
     }
-    void Fade()
+    IEnumerator Fade()
     {
-        c.a -= (Time.deltaTime / (float)_stats.VanishSpeed);
-        _renderer.material.color = c;
+        while(c.a >= 0f)
+        {
+            // Color opacity
+            c.a -= Time.deltaTime / (float)Stats.VanishSpeed;
+            _renderer.material.color = c;
+            // Light Intensity
+            float dimRate = Stats.LightIntensity * Time.deltaTime / (float)Stats.VanishSpeed;
+            _pointLight.intensity -= dimRate;
+            yield return null;
+        }
     }
 
     private void OnDrawGizmosSelected()

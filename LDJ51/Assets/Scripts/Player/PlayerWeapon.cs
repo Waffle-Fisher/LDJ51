@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour
 {
+    [SerializeField] private float _weaponDmg = 1f;
+    public float WeaponDmg { get { return _weaponDmg; } }
     private Transform _parent;
     private ParticleSystem _ps;
     private ParticleSystem.EmissionModule _em;
@@ -38,11 +40,5 @@ public class PlayerWeapon : MonoBehaviour
     public void Fire(bool b)
     {
         _em.enabled = b;
-    }
-
-    private void OnParticleTrigger()
-    {
-        _ps.GetTriggerParticles(ParticleSystemTriggerEventType.Enter, enter, out hitObj);
-        Debug.Log("I've hit" + hitObj);
     }
 }
