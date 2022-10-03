@@ -72,7 +72,7 @@ public class EnemyBehavior : MonoBehaviour
     {
         if ( (transform.position - _targetPos).sqrMagnitude <= 0.5f)
         {
-            Debug.Log("I have reached the target!");
+            PlayerHealth.Instance.DecreaseHealth(Stats.Damage);
             gameObject.SetActive(false);
         }
         else

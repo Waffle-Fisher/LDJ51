@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 2
   MoveSpeed: 3
-  AttackRange: 0.5
   LightIntensity: 5
+  Damage: 1
   Scale: {x: 1, y: 1, z: 1}
   VanishSpeed: 8

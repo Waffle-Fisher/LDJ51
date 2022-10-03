@@ -7,8 +7,8 @@ public class EnemySO : ScriptableObject
 {
     public float MaxHealth;
     public float MoveSpeed;
-
     public float LightIntensity;
+    public int Damage;
 
     public Vector3 Scale;
 

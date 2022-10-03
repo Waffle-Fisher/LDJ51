@@ -10,7 +10,7 @@ public class EnemyStats : MonoBehaviour
     public float MoveSpeed { get; private set; }
     public float VanishSpeed { get; private set; }
     public float LightIntensity { get; private set; }
-
+    public int Damage { get; private set; }
 
     private void Start()
     {
@@ -24,5 +24,6 @@ public class EnemyStats : MonoBehaviour
         transform.localScale = Stats.Scale;
         LightIntensity = Stats.LightIntensity;
         VanishSpeed = Stats.VanishSpeed;
+        Damage = Stats.Damage;
     }
 }
